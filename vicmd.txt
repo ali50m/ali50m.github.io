@@ -1,0 +1,44 @@
+vi的常用命令
+https://www.cs.colostate.edu/helpdocs/vi.html
+
+启动vi
+vi filename                 启动vi并编辑filename文件
+
+退出vi
+:x<Return>                  退出vi并保存文件
+:q!<Return>                 强制退出vi不保存
+
+光标移动
+j or <Return>               光标下移一行
+k or [up-arrow]             光标上移一行
+h or <Backspace>            光标左移一格
+l or <Space>                光标右移一格
+0                           光标移到行首 (数字0)
+$                           光标移到行末
+ctrl+f                      光标下移一屏
+ctrl+b                      光标上移一屏
+w                           后移一个单词
+b                           前移动一个单词
+H                           移动到当前屏幕的首部
+M                           移动到当前屏幕的中部
+L                           移动到当前屏幕的尾部
+1G                          移动到第一行
+G                           移动到最后一行
+
+文字编辑
+i                           光标前插入
+a                           光标后插入
+o                           行后插入
+O                           行前插入
+r                           修改光标下的文字
+x                           删除光标下的文字
+dd                          删除当前行
+dw                          删除单词
+u                           撤销
+ctrl-r                      重做
+.                           在光标处重做
+
+文字查找
+/                           查找字符串
+n                           查找下一个匹配的
+N                           查找上一个匹配的
