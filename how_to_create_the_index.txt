@@ -1,0 +1,12 @@
+I have downloaded the tree.exe inside the zip file from here http://gnuwin32.sourceforge.net/packages/tree.htm as suggested.
+
+Then I have extracted the tree.exe file to C:\Program Files\Git\usr\bin (I have added this folder to windows path to make it work with the regular CMD but it works with GITBash too).
+
+see "https://superuser.com/questions/531592/how-do-i-add-the-tree-command-to-git-bash-on-windows"
+
+
+Generate index cmd:
+
+tree -H '.' -L 1 --noreport --charset utf-8 > index.html
+
+see "https://stackoverflow.com/questions/3785055/how-can-i-create-a-simple-index-html-file-which-lists-all-files-directories/46383157"
