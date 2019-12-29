@@ -1,0 +1,31 @@
+#! /bin/sh
+echo "$(tput setaf 0)$(tput setab 4)install FTPserver$(tput sgr0)"
+#install FTPserver
+apt -y install vsftpd >/dev/null 2>&1
+adduser liu --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
+echo "liu:1111" | sudo chpasswd
+mkdir /ftp
+chown nobody:nogroup /ftp
+chmod a-w /ftp
+mkdir /ftp/files
+chown liu:liu /ftp/files
+echo "vsftpd test file" | sudo tee /ftp/files/test.txt
+
+cat <<EOT >> /etc/vsftpd.conf
+# Allow anonymous FTP? (Disabled by default).
+anonymous_enable=NO
+# Uncomment this to allow local users to log in.
+local_enable=YES
+write_enable=YES
+chroot_local_user=YES
+user_sub_token=$USER
+local_root=/ftp
+pasv_min_port=40000
+pasv_max_port=50000
+userlist_enable=YES
+userlist_file=/etc/vsftpd.userlist
+userlist_deny=NO
+EOT
+
+echo "liu" | sudo tee -a /etc/vsftpd.userlist
+systemctl restart vsftpd
