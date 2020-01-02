@@ -1,0 +1,36 @@
+#! /bin/sh
+echo "$(tput setaf 0)$(tput setab 4)install FTPserver$(tput sgr0)"
+#install FTPserver
+apt -y install vsftpd >/dev/null 2>&1
+adduser -G root -s /sbin/nologin -M liu --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
+echo "liu:1111" | sudo chpasswd
+mkdir /ftp
+chown nobody:nogroup /ftp
+chmod a-w /ftp
+mkdir /ftp/files
+chown liu:root /ftp/files
+echo "vsftpd test file" | sudo tee /ftp/files/test.txt
+
+cat <<EOT >> /etc/vsftpd.conf
+#允许匿名用户和本地用户登陆。
+anonymous_enable=NO
+#匿名用户使用的登陆名为ftp或anonymous，口令为空；匿名用户不能离开匿名用户家目录/var/ftp,且只能下载不能上传。
+local_enable=YES
+#是否允许登陆用户有写权限。属于全局设置，默认值为YES。
+write_enable=YES
+#用于指定用户列表文件中的用户不允许切换到上级目录。默认值为NO。
+chroot_local_user=YES
+#用户登入时，所在目录
+local_root=/ftp
+#被动端口范围
+pasv_min_port=40000
+pasv_max_port=50000
+#只想让指定的账户能登陆ftp，其它本地账户不允许登陆ftp。
+userlist_enable=YES
+userlist_file=/etc/vsftpd.userlist
+#userlist_deny=NO 表示指定的用户才允许登录。 Yes表示指定用户不允许登陆。
+userlist_deny=NO
+EOT
+
+echo "liu" | sudo tee -a /etc/vsftpd.userlist
+systemctl restart vsftpd
