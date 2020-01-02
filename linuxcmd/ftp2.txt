@@ -2,13 +2,13 @@
 echo "$(tput setaf 0)$(tput setab 4)install FTPserver$(tput sgr0)"
 #install FTPserver
 apt -y install vsftpd >/dev/null 2>&1
-adduser -G root -s /sbin/nologin -M liu --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
-echo "liu:1111" | sudo chpasswd
+#adduser --system --no-create-home --ingroup "root" --disabled-password --disabled-login liu
+#echo "liu:1111" | sudo chpasswd
 mkdir /ftp
 chown nobody:nogroup /ftp
 chmod a-w /ftp
 mkdir /ftp/files
-chown liu:root /ftp/files
+#chown liu:root /ftp/files
 echo "vsftpd test file" | sudo tee /ftp/files/test.txt
 
 cat <<EOT >> /etc/vsftpd.conf
@@ -32,5 +32,5 @@ userlist_file=/etc/vsftpd.userlist
 userlist_deny=NO
 EOT
 
-echo "liu" | sudo tee -a /etc/vsftpd.userlist
+echo "root" | sudo tee -a /etc/vsftpd.userlist
 systemctl restart vsftpd
