@@ -2,7 +2,7 @@
 echo "$(tput setaf 0)$(tput setab 4)install GDrive$(tput sgr0)"
 #install GDrive
 apt -y install software-properties-common
-sudo add-apt-repository ppa:alessandro-strada/ppa
+add-apt-repository -y ppa:alessandro-strada/ppa
 apt update
 apt -y install google-drive-ocamlfuse
 apt -y install xdg-utils --fix-missing
