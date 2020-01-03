@@ -16,11 +16,14 @@ ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 #start cron on bootup
 update-rc.d cron enable
 
+#hide apt pkg messages.
+export DEBIAN_FRONTEND=noninteractive
 #update apt
+apt -y install davfs2
 apt -y update >/dev/null 2>&1
 #reinstore vim
-DEBIAN_FRONTEND=noninteractive apt -y remove vim-common >/dev/null 2>&1
-DEBIAN_FRONTEND=noninteractive apt -y install vim-common >/dev/null 2>&1
+apt -y remove vim-common >/dev/null 2>&1
+apt -y install vim-common >/dev/null 2>&1
 #apt -y install tree curl >/dev/null 2>&1
 
 #add chs support
