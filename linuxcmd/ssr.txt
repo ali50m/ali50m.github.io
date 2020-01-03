@@ -11,7 +11,7 @@ apt -y update >/dev/null 2>&1
 apt -y install git >/dev/null 2>&1
 git clone --quiet https://github.com/ali50m/ssr.git /ssr
 cd /ssr && sh ./initcfg.sh
-cat <<SSREOF > greetings.txt
+cat <<SSREOF > /ssr/user-config.json
 {
     "server": "0.0.0.0",
     "server_ipv6": "::",
