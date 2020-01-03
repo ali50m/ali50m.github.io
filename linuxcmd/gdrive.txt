@@ -9,3 +9,6 @@ apt -y install xdg-utils --fix-missing
 mkdir /gdrive
 google-drive-ocamlfuse
 google-drive-ocamlfuse /gdrive
+pushd /gdrive
+/gdrive/py3SimpleHTTPServerWithUpload.py
+popd
