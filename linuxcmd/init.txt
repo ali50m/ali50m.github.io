@@ -45,5 +45,5 @@ PSEOF
 . /root/.bashrc
 
 # echo "$(tput setaf 0)$(tput setab 1)please reconnect$(tput sgr0)"
-#logout for enable settins
+#logout for enable settings
 # kill -HUP `pgrep -s 0 -o`
