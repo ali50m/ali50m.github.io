@@ -1,0 +1,6 @@
+#! /bin/sh
+echo "$(tput setaf 0)$(tput setab 4)install tx-cli$(tput sgr0)"
+#install FTPserver
+apt -y install python-pip >/dev/null 2>&1
+pip install tccli >/dev/null 2>&1
+tccli configure
