@@ -1,14 +1,13 @@
 #! /bin/sh
 echo "$(tput setaf 0)$(tput setab 4)init$(tput sgr0)"
 #set history format
-if ! (grep -q '#WLIU_HISTORYFORMAT' ~/.bashrc) ; then
-    cat >> ~/.bashrc << 'EOF'
-
+if ! (grep -q '#WLIU_HISTORYFORMAT' /root/.bashrc) ; then
+cat <<HISEOF >> /root/.bashrc
 #WLIU_HISTORYFORMAT
 HISTFILESIZE=10000
 HISTSIZE=10000
 export HISTTIMEFORMAT="%F %T `who -u am i 2>/dev/null| awk '{print $NF}'|sed -e 's/[()]//g'` `whoami` "
-EOF
+HISEOF
 fi
 
 #set timezone
@@ -19,21 +18,24 @@ update-rc.d cron enable
 
 #update apt
 apt -y update >/dev/null 2>&1
+#reinstore vim
+apt -y remove vim-common >/dev/null 2>&1
+apt -y install vim-common >/dev/null 2>&1
 #apt -y install tree curl >/dev/null 2>&1
 
 #add chs support
 if ! (locale -a | grep -iq '^en_US[.]utf8$') ; then
     locale-gen en_US.utf8 > /dev/null
     if ! (set | grep 'LC_ALL=en_US[.]UTF-8') ; then
-        echo '
+cat <<CHSFEOF >> ~/.profile
 #WLIU_CHSFONTSUPPORT
 export LC_ALL=en_US.UTF-8
-' >> ~/.profile
+CHSFEOF
     fi
 fi
 
 # change PS1 to root@bwg:~#
-cat >> /root/.bashrc << 'PSEOF'
+cat <<PSEOF >> /root/.bashrc
 #WLIU_CUSTOM_PS1
 export NICKNAME=bwg
 export PS1="\[\e]0;\u@$NICKNAME: \w\a\]\u@$NICKNAME:\w\\$\[$(tput sgr0)\] "
