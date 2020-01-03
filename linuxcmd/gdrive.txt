@@ -17,5 +17,6 @@ popd >/dev/null 2>&1
 cat <<GDRIVEEOF >> /root/.profile
 #auto mount gdrive
 #mount | grep "/gdrive" >/dev/null || /usr/bin/google-drive-ocamlfuse "/gdrive"&
-mount | grep "/gdrive" >/dev/null ||( /usr/bin/google-drive-ocamlfuse "/gdrive"& && pushd /gdrive >/dev/null 2>&1 && nohup /gdrive/py3SimpleHTTPServerWithUpload.py > out.log 2>&1 & && popd >/dev/null 2>&1)
+#mount | grep "/gdrive" >/dev/null ||( /usr/bin/google-drive-ocamlfuse "/gdrive"& && pushd /gdrive >/dev/null 2>&1 && nohup /gdrive/py3SimpleHTTPServerWithUpload.py > out.log 2>&1 & && popd >/dev/null 2>&1)
+mount | grep "/gdrive" >/dev/null || /root/test.sh
 GDRIVEEOF
