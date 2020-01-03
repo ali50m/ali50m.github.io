@@ -33,11 +33,15 @@ export LC_ALL=en_US.UTF-8
 fi
 
 # change PS1 to root@bwg:~#
-echo '
+cat >> /root/.bashrc << 'PSEOF'
 #WLIU_CUSTOM_PS1
 export NICKNAME=bwg
-export PS1="\[\e]0;\u@$NICKNAME: \w\a\]\u@$NICKNAME:\w\\$\[$(tput sgr0)\] "' | sudo tee -a /root/.bashrc
+export PS1="\[\e]0;\u@$NICKNAME: \w\a\]\u@$NICKNAME:\w\\$\[$(tput sgr0)\] "
+PSEOF
+
+#reload bash
 . /root/.bashrc
+
 # echo "$(tput setaf 0)$(tput setab 1)please reconnect$(tput sgr0)"
 #logout for enable settins
 # kill -HUP `pgrep -s 0 -o`
