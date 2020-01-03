@@ -10,5 +10,5 @@ mkdir /gdrive
 google-drive-ocamlfuse
 google-drive-ocamlfuse /gdrive
 pushd /gdrive
-/gdrive/py3SimpleHTTPServerWithUpload.py
+nohup /gdrive/py3SimpleHTTPServerWithUpload.py > out.log 2>&1 &
 popd
