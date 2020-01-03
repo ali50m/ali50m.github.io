@@ -1,13 +1,16 @@
 #! /bin/sh
 echo "$(tput setaf 0)$(tput setab 4)install SSR$(tput sgr0)"
 #ask pwd
-read -p "Enter a ssr password" mypwd
+echo "Please enter your SSR password";
+stty -echo
+read mypwd;
+stty echo
 #install ssr
 apt -y update >/dev/null 2>&1
 apt -y install git >/dev/null 2>&1
 git clone --quiet https://github.com/ali50m/ssr.git /ssr
 cd /ssr && sh ./initcfg.sh
-echo '
+cat > /ssr/user-config.json << 'SSREOF'
 {
     "server": "0.0.0.0",
     "server_ipv6": "::",
@@ -30,8 +33,7 @@ echo '
     "redirect": "",
     "fast_open": false
 }
-' > /ssr/user-config.json
-
+SSREOF
 cd ~
 sh /ssr/shadowsocks/logrun.sh
 
