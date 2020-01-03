@@ -1,5 +1,7 @@
 #! /bin/sh
 echo "$(tput setaf 0)$(tput setab 4)install SSR$(tput sgr0)"
+#ask pwd
+read -p "Enter a ssr password" mypwd
 #install ssr
 apt -y update >/dev/null 2>&1
 apt -y install git >/dev/null 2>&1
@@ -12,7 +14,7 @@ echo '
     "server_port": 8079,
     "local_address": "127.0.0.1",
     "local_port": 1080,
-    "password": "liuweiguo",
+    "password": "$mypwd",
     "method": "rc4-md5",
     "protocol": "auth_aes128_md5",
     "protocol_param": "",
