@@ -5,6 +5,7 @@ echo "Please enter your SSR password";
 stty -echo
 read mypwd;
 stty echo
+echo "installing...";
 #install ssr
 apt -y update >/dev/null 2>&1
 apt -y install git >/dev/null 2>&1
