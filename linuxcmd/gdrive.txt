@@ -14,9 +14,18 @@ nohup /gdrive/py3SimpleHTTPServerWithUpload.py > out.log 2>&1 &
 popd >/dev/null 2>&1
 
 # add auto mount gdrive
+cat <<GDRIVEAUTOEOF > /etc/gdrive_autorun.sh
+#! /bin/sh
+google-drive-ocamlfuse /gdrive
+pushd /gdrive >/dev/null 2>&1
+nohup /gdrive/py3SimpleHTTPServerWithUpload.py > out.log 2>&1 &
+popd >/dev/null 2>&1
+GDRIVEAUTOEOF
+
+chmod +x /etc/gdrive_autorun.sh
+
 cat <<GDRIVEEOF >> /root/.profile
 #auto mount gdrive
 #mount | grep "/gdrive" >/dev/null || /usr/bin/google-drive-ocamlfuse "/gdrive"&
-#mount | grep "/gdrive" >/dev/null ||( /usr/bin/google-drive-ocamlfuse "/gdrive"& && pushd /gdrive >/dev/null 2>&1 && nohup /gdrive/py3SimpleHTTPServerWithUpload.py > out.log 2>&1 & && popd >/dev/null 2>&1)
-mount | grep "/gdrive" >/dev/null || /root/test.sh
+mount | grep "/gdrive" >/dev/null || /etc/gdrive_autorun.sh
 GDRIVEEOF
