@@ -1,0 +1,6 @@
+#! /bin/sh
+echo "$(tput setaf 0)$(tput setab 4)add root login$(tput sgr0)"
+cat <<ROOTEOF >> /etc/ssh/sshd_config
+#permit root login for tx cloud server
+PermitRootLogin yes
+ROOTEOF
