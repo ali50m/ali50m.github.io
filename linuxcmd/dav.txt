@@ -1,0 +1,26 @@
+#! /bin/sh
+echo "$(tput setaf 0)$(tput setab 4)install DAV for jianguoyun$(tput sgr0)"
+#ask pwd
+echo "Please enter your jianguoyun Acc";
+stty -echo
+read myAcc;
+stty echo
+echo "installing...";
+#install davfs
+apt -y install davfs2 >/dev/null 2>&1
+if ! test -d /dav; then
+    mkdir /dav
+fi
+
+cat <<DAVECFG >> /etc/davfs2/davfs2.conf
+#fix webdav doesnt work for jianguoyun
+ignore_dav_header 1
+DAVECFG
+
+cat <<DAVESEC >> /etc/davfs2/secrets
+https://dav.jianguoyun.com/dav/我的坚果云 "$myAcc" "a9ubdcwam8ibtknq"
+DAVESEC
+
+mount.davfs https://dav.jianguoyun.com/dav/我的坚果云 /dav
+
+echo 'https://dav.jianguoyun.com/dav/我的坚果云 /dav davfs defaults,_netdev 0 0' >> /etc/fstab
