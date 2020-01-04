@@ -338,12 +338,15 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
 
 
 def test(HandlerClass = SimpleHTTPRequestHandler, ServerClass = http.server.HTTPServer):
-    port = 8000
-    if len(sys.argv) >= 2:
+    if sys.argv[1:]:
         port = int(sys.argv[1])
-    if len(sys.argv) == 3:
+    else:
+        port = 8000
+
+    if sys.argv[2:]:
         mydir = sys.argv[2]
         os.chdir(mydir)
+
     http.server.test(HandlerClass, ServerClass, port=port)
 
 if __name__ == '__main__':
