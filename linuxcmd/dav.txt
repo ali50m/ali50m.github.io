@@ -2,9 +2,9 @@
 echo "$(tput setaf 0)$(tput setab 4)install DAV for jianguoyun$(tput sgr0)"
 #ask pwd
 echo "Please enter your jianguoyun Acc";
-stty -echo
+#stty -echo
 read myAcc;
-stty echo
+#stty echo
 echo "installing...";
 #install davfs
 apt -y install davfs2 >/dev/null 2>&1
