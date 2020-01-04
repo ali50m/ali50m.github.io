@@ -1,0 +1,4 @@
+#! /bin/sh
+echo "$(tput setaf 0)$(tput setab 4)set python3 http server$(tput sgr0)"
+wget -O /usr/bin/py3fs http://www.w9.work/linuxcmd/py3fs.py
+chmod +x /usr/bin/py3fs
