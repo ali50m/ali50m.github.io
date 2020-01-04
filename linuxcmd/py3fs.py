@@ -16,6 +16,9 @@ Fix the rule to handle multiple duplicated filenames.
 20190128 Update:
 With the help of [a.7] and [xmq], we have fixed a bug that will generate extra two bytes in the newly uploaded file.
 
+20200104 Update:
+add path support. replace cgi.escape() with html.escape()
+
 In addition, we now have a buffer to store the uploaded data and write into file every 1024 Bytes, instead of the former line by line method.
 
 More details can be found on the blog with the link below:
@@ -34,7 +37,6 @@ import os
 import posixpath
 import http.server
 import urllib
-import cgi
 import shutil
 import mimetypes
 import re
