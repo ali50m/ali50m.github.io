@@ -7,7 +7,7 @@ read myAcc;
 #stty echo
 echo "installing...";
 #install davfs
-apt -y install davfs2 >/dev/null 2>&1
+DEBIAN_FRONTEND=noninteractive apt -y install davfs2 >/dev/null 2>&1
 if ! test -d /dav; then
     mkdir /dav
 fi
