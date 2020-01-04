@@ -39,6 +39,7 @@ import shutil
 import mimetypes
 import re
 import sys
+import html
 
 class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
 
@@ -251,7 +252,7 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
             self.send_error(404, "No permission to list directory")
             return None
         list.sort(key=lambda a: a.lower())
-        displaypath = cgi.escape(urllib.parse.unquote(self.path))
+        displaypath = html.escape(urllib.parse.unquote(self.path))
 
         f = ('<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">') +\
             ('<html><head>') +\
@@ -274,7 +275,7 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
             if os.path.islink(fullname):
                 displayname = name + "@"
                 # Note: a link to a directory displays with @ and links with /
-            f = f + ('<li><a href="%s">%s</a>' % (urllib.parse.quote(linkname), cgi.escape(displayname)))
+            f = f + ('<li><a href="%s">%s</a>' % (urllib.parse.quote(linkname), html.escape(displayname)))
         f = f + ("</ul><hr></body></html>")
 
         f = f.encode('utf-8')
@@ -338,8 +339,11 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
 
 def test(HandlerClass = SimpleHTTPRequestHandler, ServerClass = http.server.HTTPServer):
     port = 8000
-    if len(sys.argv) == 2:
+    if len(sys.argv) >= 2:
         port = int(sys.argv[1])
+    if len(sys.argv) == 3:
+        mydir = sys.argv[2]
+        os.chdir(mydir)
     http.server.test(HandlerClass, ServerClass, port=port)
 
 if __name__ == '__main__':
