@@ -3,10 +3,10 @@ echo "$(tput setaf 0)$(tput setab 4)set python3 http server$(tput sgr0)"
 wget -O /usr/bin/py3fs http://www.w9.work/linuxcmd/py3fs.py
 chmod +x /usr/bin/py3fs
 mkdir /root/fs
-py3fs 8000 /root/fs
+nohup py3fs 8000 /root/fs > out.log 2>&1 &
 
 #add to autorun
 crontab -l > my-crontab
-echo "@reboot py3fs 8000 /root/fs" >> my-crontab
+echo "@reboot nohup py3fs 8000 /root/fs > out.log 2>&1 &" >> my-crontab
 crontab my-crontab
 rm my-crontab
