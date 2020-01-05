@@ -2,18 +2,16 @@
 echo "$(tput setaf 0)$(tput setab 4)install FTPserver$(tput sgr0)"
 #install FTPserver
 apt -y install vsftpd >/dev/null 2>&1
-adduser liu --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
-echo "liu:1111" | sudo chpasswd
-mkdir /ftp
-chown liu:liu /ftp
+# adduser liu --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
+# echo "liu:1111" | sudo chpasswd
+# mkdir /ftp
+# chown liu:liu /ftp
 # chmod a-w /ftp
 # mkdir /ftp/files
 # chown liu:liu /ftp/files
-echo "vsftpd test file" | sudo tee /ftp/test.txt
+# echo "vsftpd test file" | sudo tee /ftp/test.txt
 
 cat <<EOT >> /etc/vsftpd.conf
-#使用本地时间
-use_localtime=YES
 #允许匿名用户和本地用户登陆。
 anonymous_enable=NO
 #匿名用户使用的登陆名为ftp或anonymous，口令为空；匿名用户不能离开匿名用户家目录/var/ftp,且只能下载不能上传。
@@ -23,7 +21,7 @@ write_enable=YES
 #用于指定用户列表文件中的用户不允许切换到上级目录。默认值为NO。
 chroot_local_user=YES
 #用户登入时，所在目录
-local_root=/ftp
+local_root=/dav
 #支持数据流的被动式联机模式
 pasv_enable=YES
 #被动端口范围
@@ -36,5 +34,14 @@ userlist_file=/etc/vsftpd.userlist
 userlist_deny=NO
 EOT
 
-echo "liu" | sudo tee -a /etc/vsftpd.userlist
+rm /etc/ftpusers
+
+cat <<FTPEC > /etc/vsftpd.userlist
+
+#allow to access ftp
+root
+FTPEC
+
+# echo "liu" | sudo tee -a /etc/vsftpd.userlist
+
 systemctl restart vsftpd
