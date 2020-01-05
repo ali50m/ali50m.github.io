@@ -5,11 +5,11 @@ apt -y install vsftpd >/dev/null 2>&1
 adduser liu --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
 echo "liu:1111" | sudo chpasswd
 mkdir /ftp
-chown nobody:nogroup /ftp
-chmod a-w /ftp
-mkdir /ftp/files
-chown liu:liu /ftp/files
-echo "vsftpd test file" | sudo tee /ftp/files/test.txt
+chown liu:liu /ftp
+# chmod a-w /ftp
+# mkdir /ftp/files
+# chown liu:liu /ftp/files
+echo "vsftpd test file" | sudo tee /ftp/test.txt
 
 cat <<EOT >> /etc/vsftpd.conf
 #使用本地时间
