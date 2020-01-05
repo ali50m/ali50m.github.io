@@ -18,7 +18,7 @@ ignore_dav_header 1
 DAVECFG
 
 cat <<DAVESEC >> /etc/davfs2/secrets
-https://dav.jianguoyun.com/dav/我的坚果云 "$myAcc" "a9ubdcwam8ibtknq"
+https://dav.jianguoyun.com/dav/我的坚果云 $myAcc a9ubdcwam8ibtknq
 DAVESEC
 
 mount.davfs https://dav.jianguoyun.com/dav/我的坚果云 /dav
