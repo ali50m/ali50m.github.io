@@ -19,7 +19,7 @@ local_enable=YES
 #是否允许登陆用户有写权限。属于全局设置，默认值为YES。
 write_enable=YES
 #用于指定用户列表文件中的用户不允许切换到上级目录。默认值为NO。
-chroot_local_user=YES
+#chroot_local_user=NO
 #用户登入时，所在目录
 local_root=/dav
 #支持数据流的被动式联机模式
