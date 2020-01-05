@@ -12,6 +12,8 @@ chown liu:liu /ftp/files
 echo "vsftpd test file" | sudo tee /ftp/files/test.txt
 
 cat <<EOT >> /etc/vsftpd.conf
+#使用本地时间
+use_localtime=YES
 #允许匿名用户和本地用户登陆。
 anonymous_enable=NO
 #匿名用户使用的登陆名为ftp或anonymous，口令为空；匿名用户不能离开匿名用户家目录/var/ftp,且只能下载不能上传。
@@ -22,6 +24,8 @@ write_enable=YES
 chroot_local_user=YES
 #用户登入时，所在目录
 local_root=/ftp
+#支持数据流的被动式联机模式
+pasv_enable=YES
 #被动端口范围
 pasv_min_port=40000
 pasv_max_port=50000
