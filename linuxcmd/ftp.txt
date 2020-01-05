@@ -21,7 +21,7 @@ write_enable=YES
 #用于指定用户列表文件中的用户不允许切换到上级目录。默认值为NO。
 chroot_local_user=NO
 #用户登入时，所在目录
-local_root=/dav/ftp
+local_root=/gdrive/ftp
 #支持数据流的被动式联机模式
 pasv_enable=YES
 #被动端口范围
