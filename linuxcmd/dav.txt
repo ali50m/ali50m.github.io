@@ -13,11 +13,13 @@ if ! test -d /dav; then
 fi
 
 cat <<DAVECFG >> /etc/davfs2/davfs2.conf
+
 #fix webdav doesnt work for jianguoyun
 ignore_dav_header 1
 DAVECFG
 
 cat <<DAVESEC >> /etc/davfs2/secrets
+
 #pass for jianguoyun
 https://dav.jianguoyun.com/dav/我的坚果云/ "$myAcc" "a9ubdcwam8ibtknq"
 DAVESEC
@@ -27,6 +29,7 @@ mount.davfs https://dav.jianguoyun.com/dav/我的坚果云/ /dav
 #echo '"https://dav.jianguoyun.com/dav/我的坚果云/" /dav davfs defaults,_netdev 0 0' >> /etc/fstab
 
 cat <<FSTAB >> /etc/fstab
+
 #jianguoyun autorun
 https://dav.jianguoyun.com/dav/我的坚果云/ /dav davfs defaults,_netdev 0 0
 FSTAB
