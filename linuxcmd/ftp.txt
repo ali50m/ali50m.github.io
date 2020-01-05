@@ -37,8 +37,6 @@ EOT
 rm /etc/ftpusers >/dev/null 2>&1
 
 cat <<FTPEC > /etc/vsftpd.userlist
-
-#allow to access ftp
 root
 FTPEC
 
