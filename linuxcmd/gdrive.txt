@@ -1,25 +1,25 @@
 #! /bin/sh
 echo "$(tput setaf 0)$(tput setab 4)install GDrive$(tput sgr0)"
 #install GDrive
-apt -y install software-properties-common >/dev/null 2>&1
+DEBIAN_FRONTEND=noninteractive apt -y install software-properties-common >/dev/null 2>&1
 add-apt-repository -y ppa:alessandro-strada/ppa >/dev/null 2>&1
 apt update >/dev/null 2>&1
-apt -y install google-drive-ocamlfuse >/dev/null 2>&1
-apt -y install xdg-utils --fix-missing >/dev/null 2>&1
+DEBIAN_FRONTEND=noninteractive apt -y install google-drive-ocamlfuse >/dev/null 2>&1
+DEBIAN_FRONTEND=noninteractive apt -y install xdg-utils --fix-missing >/dev/null 2>&1
 mkdir /gdrive
 google-drive-ocamlfuse
 google-drive-ocamlfuse /gdrive
-pushd /gdrive >/dev/null 2>&1
-nohup /gdrive/py3SimpleHTTPServerWithUpload.py > out.log 2>&1 &
-popd >/dev/null 2>&1
+# pushd /gdrive >/dev/null 2>&1
+# nohup /gdrive/py3SimpleHTTPServerWithUpload.py > out.log 2>&1 &
+# popd >/dev/null 2>&1
 
 # add auto mount gdrive
 cat <<GDRIVEAUTOEOF > /etc/gdrive_autorun.sh
 #! /bin/sh
 google-drive-ocamlfuse /gdrive
-pushd /gdrive >/dev/null 2>&1
-nohup /gdrive/py3SimpleHTTPServerWithUpload.py > out.log 2>&1 &
-popd >/dev/null 2>&1
+# pushd /gdrive >/dev/null 2>&1
+# nohup /gdrive/py3SimpleHTTPServerWithUpload.py > out.log 2>&1 &
+# popd >/dev/null 2>&1
 GDRIVEAUTOEOF
 
 chmod +x /etc/gdrive_autorun.sh
