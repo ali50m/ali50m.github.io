@@ -34,7 +34,7 @@ userlist_file=/etc/vsftpd.userlist
 userlist_deny=NO
 EOT
 
-rm /etc/ftpusers
+rm /etc/ftpusers >/dev/null 2>&1
 
 cat <<FTPEC > /etc/vsftpd.userlist
 
