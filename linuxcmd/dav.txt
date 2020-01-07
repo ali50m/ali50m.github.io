@@ -1,4 +1,5 @@
 #! /bin/sh
+#部署dav服务器
 echo "$(tput setaf 0)$(tput setab 4)install DAV for jianguoyun$(tput sgr0)"
 #ask pwd
 echo "Please enter your jianguoyun Acc";
